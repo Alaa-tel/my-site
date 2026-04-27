@@ -1,0 +1,75 @@
+/* Modern minimal portfolio styles for Alaa — UX/UI Designer */
+:root{
+  --bg: #f6f8fb;
+  --card: #ffffff;
+  --muted: #6b7280;
+  --text: #0f1724;
+  --accent: #0ea5a4; /* teal accent */
+  --glass: rgba(15,23,36,0.04);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  background: linear-gradient(180deg, var(--bg), #eef2f6);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.5;
+}
+.container{max-width:1100px;margin:0 auto;padding:40px 28px}
+.header{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:14px}
+.logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#7dd3fc);display:flex;align-items:center;justify-content:center;font-weight:700;color:white;font-size:22px;box-shadow:0 6px 18px rgba(14,165,164,0.12)}
+.site-title{font-weight:700}
+.nav{display:flex;gap:18px;align-items:center}
+.nav a{color:var(--muted);text-decoration:none;font-weight:600;padding:8px 10px;border-radius:8px;transition:all .22s}
+.nav a:hover{background:var(--glass);color:var(--text);transform:translateY(-2px)}
+.resume{border:1px solid rgba(15,23,36,0.06);padding:8px 12px;border-radius:10px;background:white}
+/* Hero */
+.hero{display:grid;grid-template-columns:1fr 380px;gap:36px;align-items:center;margin-top:36px}
+.intro h1{font-size:42px;margin:0 0 12px;letter-spacing:-0.02em}
+.intro p{color:var(--muted);margin:0 0 20px;font-size:16px}
+.btn{display:inline-block;padding:12px 16px;border-radius:12px;background:linear-gradient(90deg,var(--accent),#06b6d4);color:white;text-decoration:none;font-weight:700;box-shadow:0 8px 24px rgba(14,165,164,0.12);transition:transform .22s, box-shadow .22s}
+.btn:hover{transform:translateY(-3px)}
+.profile-card{background:var(--card);border-radius:14px;padding:18px;box-shadow:0 10px 30px rgba(2,6,23,0.06);border:1px solid rgba(2,6,23,0.03)}
+.profile-art{height:260px;border-radius:10px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#06b6d4,#7dd3fc);color:white;font-weight:700}
+.meta{display:flex;gap:12px;padding-top:12px}
+.meta .stat{flex:1;text-align:center}
+.meta .stat strong{display:block;font-size:18px}
+/* Sections */
+.section{margin-top:48px}
+.section h2{margin:0 0 18px;font-size:20px}
+.card{background:var(--card);border-radius:12px;padding:16px;border:1px solid rgba(2,6,23,0.04);box-shadow:0 8px 22px rgba(2,6,23,0.04)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.project{border-radius:12px;overflow:hidden;position:relative;display:flex;flex-direction:column;justify-content:flex-end;min-height:220px;transition:transform .32s, box-shadow .32s}
+.project img{width:100%;height:150px;object-fit:cover;display:block}
+.project .info{padding:14px;background:linear-gradient(180deg,rgba(0,0,0,0.00),rgba(0,0,0,0.04));}
+.project .title{font-weight:700;margin-bottom:6px}
+.project .desc{font-size:14px;color:var(--muted)}
+.project:hover{transform:translateY(-8px);box-shadow:0 18px 40px rgba(2,6,23,0.08)}
+/* Contact */
+.contact-list{display:flex;gap:14px;align-items:center}
+.social{display:flex;gap:12px}
+.social a{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:10px;background:linear-gradient(180deg,rgba(2,6,23,0.02),transparent);text-decoration:none;color:var(--muted);transition:transform .18s, color .18s}
+.social a:hover{transform:translateY(-4px);color:var(--accent)}
+.footer{margin-top:36px;padding:22px;border-radius:10px;background:transparent;display:flex;align-items:center;justify-content:space-between}
+.muted{color:var(--muted)}
+/* Animations */
+.fade-in{opacity:0;transform:translateY(6px);animation:fadeIn .7s ease forwards}
+@keyframes fadeIn{to{opacity:1;transform:none}}
+/* Responsive */
+@media (max-width:980px){
+  .hero{grid-template-columns:1fr}
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .profile-art{height:200px}
+}
+@media (max-width:560px){
+  .container{padding:24px}
+  .grid{grid-template-columns:1fr}
+  .header{flex-direction:column;align-items:flex-start}
+  .nav{margin-top:8px;flex-wrap:wrap}
+  .hero{gap:20px}
+  .profile-art{height:160px}
+}
