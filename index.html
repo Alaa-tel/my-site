@@ -11,7 +11,7 @@
 </head>
 <body>
   <div class="container">
-    <header class="header fade-in" style="animation-delay:.05s">
+    <header class="header fade-in delay-05">
       <div class="brand">
         <div class="logo">A</div>
         <div>
@@ -29,16 +29,16 @@
 
     <main>
       <!-- Hero -->
-      <section id="home" class="hero fade-in" style="animation-delay:.12s">
+      <section id="home" class="hero fade-in delay-12">
         <div class="intro">
           <h1>Hello, I'm Alaa</h1>
           <p class="lead">I design thoughtful digital experiences and visual systems. I focus on clarity, motion, and beautiful details that scale across products.</p>
-          <div style="display:flex;gap:12px;align-items:center">
+          <div class="hero-actions">
             <a href="#work" class="btn">View work</a>
             <a href="#contact" class="nav-link muted">Get in touch</a>
           </div>
         </div>
-        <aside class="profile-card fade-in" style="animation-delay:.18s">
+        <aside class="profile-card fade-in delay-18">
           <div class="profile-art">
             <img src="images/profile.svg" alt="Alaa" />
           </div>
@@ -51,7 +51,7 @@
       </section>
 
       <!-- About -->
-      <section id="about" class="section fade-in" style="animation-delay:.24s">
+      <section id="about" class="section fade-in delay-24">
         <h2>About</h2>
         <div class="card">
           <p>I'm Alaa, a UX/UI designer who helps teams craft elegant, usable products. My work spans research-driven interfaces, design systems, and brand identity. I’m passionate about motion, typography, and pixel-perfect execution.</p>
@@ -59,10 +59,10 @@
       </section>
 
       <!-- Work -->
-      <section id="work" class="section fade-in" style="animation-delay:.30s">
+      <section id="work" class="section fade-in delay-30">
         <h2>Selected Work</h2>
         <div class="grid">
-          <article class="project card fade-in" style="animation-delay:.34s">
+          <article class="project card fade-in delay-34">
             <img src="images/project-1.svg" alt="Project 1">
             <div class="info">
               <div class="title">Brand exploration</div>
@@ -70,7 +70,7 @@
             </div>
           </article>
 
-          <article class="project card fade-in" style="animation-delay:.38s">
+          <article class="project card fade-in delay-38">
             <img src="images/project-2.svg" alt="Project 2">
             <div class="info">
               <div class="title">Product UI</div>
@@ -78,7 +78,7 @@
             </div>
           </article>
 
-          <article class="project card fade-in" style="animation-delay:.42s">
+          <article class="project card fade-in delay-42">
             <img src="images/project-3.svg" alt="Project 3">
             <div class="info">
               <div class="title">Marketing site</div>
@@ -86,7 +86,7 @@
             </div>
           </article>
 
-          <article class="project card fade-in" style="animation-delay:.46s">
+          <article class="project card fade-in delay-46">
             <img src="images/project-4.svg" alt="Project 4">
             <div class="info">
               <div class="title">Visual system</div>
@@ -97,9 +97,9 @@
       </section>
 
       <!-- Contact -->
-      <section id="contact" class="section fade-in" style="animation-delay:.52s">
+      <section id="contact" class="section fade-in delay-52">
         <h2>Contact</h2>
-        <div class="card" style="display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap">
+        <div class="card contact-flex">
           <div>
             <div style="font-weight:700">Reach out</div>
             <div class="muted">Email: <a href="mailto:alaa@example.com">alaa@example.com</a></div>
@@ -117,9 +117,8 @@
                 <img src="assets/icons/twitter.svg" alt="Twitter">
               </a>
             </div>
-            <!-- Moved weather widget: same IDs so the existing script will populate it -->
-            <div class="weather-card card" id="weather" aria-live="polite" style="min-width:200px;margin-left:12px">
-              <div class="weather-row" style="display:flex;align-items:center;gap:12px">
+            <div class="weather-card card weather-inline fade-in delay-62" id="weather" aria-live="polite">
+              <div class="weather-row">
                 <div class="weather-emoji" id="weather-emoji">⛅</div>
                 <div>
                   <div class="weather-temp" id="weather-temp">--°F</div>
@@ -132,62 +131,13 @@
         </div>
       </section>
 
-      <footer class="footer muted fade-in" style="animation-delay:.62s">
+      <footer class="footer muted fade-in delay-62">
         <div>© 2023 Alaa. All rights reserved.</div>
         <div>Built with care</div>
       </footer>
     </main>
   </div>
 
-  <script>
-    // Open-Meteo current weather using browser geolocation
-    (function(){
-      const emojiMap = (code) => {
-        // Map Open-Meteo weathercodes to emoji + label
-        // reference: https://open-meteo.com/en/docs
-        if (code === 0) return {emoji: '☀️', label: 'Clear'};
-        if (code >= 1 && code <= 3) return {emoji: '⛅', label: 'Partly cloudy'};
-        if (code === 45 || code === 48) return {emoji: '🌫️', label: 'Fog'};
-        if ((code >= 51 && code <= 67) || (code >= 80 && code <= 82)) return {emoji: '🌧️', label: 'Rain'};
-        if (code >= 71 && code <= 77) return {emoji: '❄️', label: 'Snow'};
-        if (code >= 95 && code <= 99) return {emoji: '⛈️', label: 'Thunderstorm'};
-        return {emoji: '☁️', label: 'Cloudy'};
-      };
-
-      const $temp = document.getElementById('weather-temp');
-      const $emoji = document.getElementById('weather-emoji');
-      const $desc = document.getElementById('weather-desc');
-      const $note = document.getElementById('weather-note');
-
-      function showError(msg){
-        $desc.textContent = msg;
-        $note.style.display = 'none';
-      }
-
-      function fetchWeather(lat, lon){
-        const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&temperature_unit=fahrenheit`;
-        fetch(url).then(r=>r.json()).then(data=>{
-          if (!data || !data.current_weather) return showError('No weather data');
-          const cw = data.current_weather;
-          const t = Math.round(cw.temperature);
-          const map = emojiMap(cw.weathercode);
-          $temp.textContent = `${t}°F`;
-          $emoji.textContent = map.emoji;
-          $desc.textContent = map.label;
-          $note.style.display = 'none';
-        }).catch(()=>showError('Unable to fetch weather'));
-      }
-
-      if (!navigator.geolocation){
-        showError('Geolocation not supported');
-      } else {
-        navigator.geolocation.getCurrentPosition(pos => {
-          fetchWeather(pos.coords.latitude, pos.coords.longitude);
-        }, err => {
-          showError('Location denied');
-        }, {enableHighAccuracy:false, timeout:8000});
-      }
-    })();
-  </script>
+  <script src="app.js"></script>
 </body>
 </html>
