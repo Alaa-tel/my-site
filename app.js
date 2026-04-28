@@ -12,14 +12,15 @@
     return {emoji: '☁️', label: 'Cloudy'};
   };
 
-  const $temp = document.getElementById('weather-temperature');
+  const $temp = document.getElementById('weather-temp');
   const $emoji = document.getElementById('weather-emoji');
   const $desc = document.getElementById('weather-desc');
   const $note = document.getElementById('weather-note');
 
   function showError(msg){
-    $desc.textContent = msg;
-    $note.style.display = 'none';
+    if ($desc) $desc.textContent = msg;
+    if ($note) $note.style.display = 'none';
+    if ($temp) $temp.textContent = '--°F';
   }
 
   function fetchWeather(lat, lon){
