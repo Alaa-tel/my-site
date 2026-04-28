@@ -12,7 +12,7 @@
     return {emoji: '☁️', label: 'Cloudy'};
   };
 
-  const $temp = document.getElementById('weather-temp');
+  const $temp = document.getElementById('weather-temperature');
   const $emoji = document.getElementById('weather-emoji');
   const $desc = document.getElementById('weather-desc');
   const $note = document.getElementById('weather-note');
@@ -45,4 +45,36 @@
       showError('Location denied');
     }, {enableHighAccuracy:false, timeout:8000});
   }
+})();
+
+// Title reveal animation: split into characters and apply staggered delays
+(function titleAnimate(){
+  const h = document.querySelector('.intro h1');
+  if (!h) return;
+  const original = h.textContent.trim();
+  h.textContent = '';
+  const frag = document.createDocumentFragment();
+  const delayBase = 0.06; // seconds per char
+  const animDuration = 680; // ms, matches .68s in CSS
+
+  Array.from(original).forEach((ch,i)=>{
+    const span = document.createElement('span');
+    span.className = 'title-char';
+    span.style.animationDelay = (i * delayBase)+'s';
+    span.textContent = ch === ' ' ? '\u00A0' : ch;
+    frag.appendChild(span);
+  });
+  h.appendChild(frag);
+
+  // Apply a subtle shine a bit into the animation
+  const lastDelayMs = Math.max(0, (original.length - 1) * delayBase * 1000);
+  const shineApplyMs = lastDelayMs + (animDuration * 0.6);
+  setTimeout(()=> h.classList.add('shine'), Math.max(200, shineApplyMs));
+
+  // After all character animations finish, restore plain text so title is static
+  const restoreMs = lastDelayMs + animDuration + 120; // small buffer
+  setTimeout(()=>{
+    h.classList.remove('shine');
+    h.textContent = original;
+  }, restoreMs);
 })();
